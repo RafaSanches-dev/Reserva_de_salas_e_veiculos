@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/componentes.css') }}" >
+    <style>
+        .btn {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="top-bar">
+        <h1>Login</h1>
+    </header>
+
+    <img src="{{ url_for('static', filename = 'imagens/Logo_UEMG.png' )}}" class="Logo_UEMG">
+    
+
+    <div class="container">
+        <div class="card">
+
+            <form action = "{{ url_for('login') }}"  method = 'POST'>
+
+                <h2>Acessar conta</h2>
+
+                {{ form.hidden_tag() }}
+                
+                {{ form.email.label() }}
+                {{ form.email( type = 'email', class = 'input') }}
+
+                {{ form.senha.label() }}
+                {{ form.senha( type = 'password', class = 'input') }}
+                
+                {{ form.submit( class = 'btn' ) }}
+
+            </form>
+
+            <!-- mensagem flash -->
+            {% for message in get_flashed_messages() %}
+                <div class="alert alert-error" style="margin-top: 15px; padding: 10px; background-color: #f8d7da; color: #721c24; border-radius: 5px;">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            <div class="login-links">
+                <a href="{{ url_for('esqueceu_senha') }}">Esqueceu a senha?</a>
+                <br><br>
+                <span>Não tem conta?</span>
+                <a href="{{ url_for ('cadastro') }}" class="link-bold">Criar conta</a>
+            </div>
+        </div>
+    </div>
+
+    
+
+</body> 
+</html>

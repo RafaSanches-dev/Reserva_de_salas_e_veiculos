@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solicitações Pendentes</title>
-    <link rel="stylesheet" href="componentes.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/componentes.html')}}">
     <style>
         body {
             padding: 20px;
@@ -55,32 +55,32 @@
     <!-- Solicitação Pendente -->
     <div class="solicitacao-card">
         <div class="solicitacao-header">
-            <span><strong>Reserva:</strong> Sala 102</span>
-            <span class="status pendente">Pendente</span>
+            <span><strong>Reserva:</strong></span>
+            <span class="status pendente"></span>
         </div>
-        <p><strong>Data solicitada:</strong> 12/12/2025</p>
-        <p><strong>Horário:</strong> 14:00 às 16:00</p>
+        <p><strong>Data solicitada:</strong></p>
+        <p><strong>Horário:</strong></p>
     </div>
 
     <!-- Solicitação Aprovada -->
     <div class="solicitacao-card">
         <div class="solicitacao-header">
-            <span><strong>Reserva:</strong> Veículo - Carro A</span>
-            <span class="status aprovado">Aprovado</span>
+            <span><strong>Reserva:</strong></span>
+            <span class="status aprovado"></span>
         </div>
-        <p><strong>Data solicitada:</strong> 18/12/2025</p>
-        <p><strong>Horário:</strong> 08:00 às 12:00</p>
+        <p><strong>Data solicitada:</strong></p>
+        <p><strong>Horário:</strong></p>
     </div>
 
     <!-- Solicitação Rejeitada -->
     <div class="solicitacao-card">
         <div class="solicitacao-header">
-            <span><strong>Reserva:</strong> Sala 204</span>
-            <span class="status rejeitado">Rejeitado</span>
+            <span><strong>Reserva:</strong></span>
+            <span class="status rejeitado"></span>
         </div>
-        <p><strong>Data solicitada:</strong> 20/12/2025</p>
-        <p><strong>Horário:</strong> 09:00 às 11:00</p>
-        <p class="motivo"><strong>Motivo:</strong> Sala já ocupada neste horário.</p>
+        <p><strong>Data solicitada:</strong></p>
+        <p><strong>Horário:</strong></p>
+        <p class="motivo"><strong>Motivo:</strong></p>
     </div>
 
 </body>

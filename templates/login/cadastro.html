@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Conta</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/componentes.css') }}">
+</head>
+<body>
+
+<header class="top-bar">
+    <h1>Criar conta</h1>
+</header>
+
+<img src="{{ url_for('static', filename = 'imagens/Logo_UEMG.png')}}" class="Logo_UEMG">
+
+<div class="container">
+    <div class="card">
+
+        <h2>Cadastro do usuário</h2>
+
+        <!--  a funçao action ela faz o envio dos dados para um rota, por padrao, sem ela, os dados sao enviados para a a funçao da pagina do forms  -->
+        <form action = "{{ url_for('cadastro') }}" method = 'POST'>
+
+            {{ form.hidden_tag() }}
+
+            {{ form.nome.label() }}
+            {{ form.nome( type = 'text', class = 'input' ) }}
+
+            {{ form.email.label() }}
+            {{ form.email( type = 'email', class = 'input' ) }}
+
+            {{ form.senha.label() }}
+            {{ form.senha(type = 'password', class = 'input') }}
+
+            {{ form.confirmar_senha.label() }}
+            {{ form.confirmar_senha(type = 'password', class = 'input') }}
+
+            {% if form.confirmar_senha.errors %}
+
+                {% for error in form.confirmar_senha.errors %}
+
+                    <div class = 'alert-error' style="margin-top: 15px; padding: 10px; background-color: #d4edda; color: #155724; border-radius: 5px;">
+                        {{ error }} 
+                    </div>
+
+                {% endfor %}
+
+            {% endif %}
+
+            {{ form.submit(class = 'btn') }}
+
+        </form>
+
+        <!-- mensagens flash, pode colocar dentro do form se quiser  -->
+        {% for message in get_flashed_messages() %}
+            <div class="alert alert-success" style="margin-top: 15px; padding: 10px; background-color: #d4edda; color: #155724; border-radius: 5px;">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <div class="login-links">
+            <span>Já tem conta?</span>
+            <a href="{{ url_for('login') }}" class="link-bold">Entrar</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

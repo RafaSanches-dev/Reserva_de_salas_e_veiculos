@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/componentes.css' )}}">
+    <style>
+        .sidebar a.active {
+            background-color: #0056b3;
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<img src="{{ url_for('static', filename = 'imagens/Logo_UEMG.png') }}" class="Logo_UEMG">
+
+<div class="layout">
+
+    <!-- Menu Lateral -->
+    <aside class="sidebar">
+
+        <h2 class="logo">Sistema</h2>
+
+        <a href="#" data-page="home">Home</a>
+        <a href="#" data-page="perfil">Perfil</a>
+        <a href="#" data-page="solicitar_reserva">Solicitar Reserva</a>
+        <a href="#" data-page="solicitacoes_pendentes">Solicitações Pendentes</a>
+        <a href="#" data-page="minhas_reservas">Minhas Reservas</a>
+        <a href="#" data-page="avisos">Avisos</a>
+
+    </aside>
+
+    <!-- Área de Conteúdo -->
+    <div id="content-area" class="content-area"></div>
+
+</div>
+
+<script src="{{ url_for('static', filename = 'js/dashboard.js' )}}"></script>
+
+</body>
+</html>

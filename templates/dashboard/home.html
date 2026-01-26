@@ -1,0 +1,9 @@
+<div class="pagina">
+    <h1 class="titulo">Home</h1>
+
+    <div class="card">
+        <!-- nao posso colocar a variavel nome aqui, pois a variavel nome nao fica na memoria, ela apenas existe durante a execuçao da rota -->
+        <h2>Bem-vindo, {{ session['cliente_nome']|title }}!</h2>
+        <p>Aqui você pode gerenciar suas reservas de salas e veículos.</p>
+    </div>
+</div>

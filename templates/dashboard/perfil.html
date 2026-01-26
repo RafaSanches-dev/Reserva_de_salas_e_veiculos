@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Perfil</title>
-    <link rel="stylesheet" href="componentes.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/componentes.css')}}">
 </head>
 <body>
 
@@ -13,16 +13,20 @@
     <div class="card">
 
         <label class="label">Nome:</label>
-        <input type="text" class="input" value="Usuário Exemplo" disabled>
+
+        <p class = 'input' style = 'text-align: left;'>{{ session['cliente_nome']|title }}</p>
 
         <label class="label">Email:</label>
-        <input type="text" class="input" value="usuario@email.com" disabled>
+        
+        <p class = 'input' style = 'text-align: left;'>{{ session['cliente_email'] }}</p>
 
         <label class="label">CPF:</label>
         <input type="text" class="input">
 
         <label class="label">RG:</label>
         <input type="text" class="input">
+
+        <button>Salvar</button>
 
     </div>
 </div>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Minhas Reservas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/componentes.css' )}}">
+</head>
+<body>
+
+<div class="pagina">
+
+    <h1 class="titulo">Minhas Reservas</h1>
+
+    <div class="card">
+
+        <h2 class="subtitulo">Reservas de Sala</h2>
+
+        <div class="lista">
+            <!-- Exemplo 1 -->
+            <div class="item">
+                <p><strong>Sala:</strong></p>
+                <p><strong>Data:</strong></p>
+                <p><strong>Horário:</strong></p>
+                <span class="status pendente"></span>
+            </div>
+
+            <!-- Exemplo 2 -->
+            <div class="item">
+                <p><strong>Sala:</strong></p>
+                <p><strong>Data:</strong></p>
+                <p><strong>Horário:</strong></p>
+                <span class="status aprovado"></span>
+            </div>
+        </div>
+
+        <h2 class="subtitulo"></h2>
+
+        <div class="lista">
+            <div class="item">
+                <p><strong>Veículo:</strong></p>
+                <p><strong>Destino:</strong></p>
+                <p><strong>Saída:</strong></p>
+                <span class="status negado"></span>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
