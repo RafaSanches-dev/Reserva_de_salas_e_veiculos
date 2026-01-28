@@ -17,7 +17,7 @@ def cadastro():
         novo_cliente = Cliente( nome = nome, email = email, senha = senha_criptografada)
         db.session.add(novo_cliente)
         db.session.commit()
-        flash('Cadastro realizado com sucesso!')
+        flash('Cadastro realizado com sucesso.')
         return redirect( url_for('cadastro'))
     return render_template('login/cadastro.html', 
                            form = form)
@@ -39,14 +39,17 @@ def login():
                 session['cliente_id'] = cliente.id
                 session['cliente_nome'] = cliente.nome
                 session['cliente_email'] = cliente.email
+                session['cliente_cpf'] = cliente.cpf
+                session['cliente_rg'] = cliente.rg
+                flash('Login realizado com sucesso.')
                 return redirect( url_for('dashboard') )
             else:
                 # senha incorreta
-                flash('Senha incorreta. Tente Novamente.')
+                flash('Senha incorreta. Tente novamente.')
                 return render_template('login/login.html', form = form)
         else:
             # email não cadastrado
-            flash('Email não cadastrado. Por favor, cadastre-se')
+            flash('Email não cadastrado. Por favor, cadastre-se.')
             return render_template('login/login.html', form = form)
     
     return render_template('login/login.html', form = form)
@@ -54,3 +57,10 @@ def login():
 @app.route('/esqueceu_senha')
 def esqueceu_senha():
     return render_template('login/recuperacao_de_senha.html')
+
+@app.route('/logout')
+def logout():
+    # session.clear(), limpa toda a session(ou como tem os if na dashboard o usuario volta para o login)
+    session.clear()
+    flash('Você saiu com sucesso.')
+    return redirect( url_for('login') )

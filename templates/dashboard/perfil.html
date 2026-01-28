@@ -8,28 +8,49 @@
 <body>
 
 <div class="pagina">
-    <h1 class="titulo">Meu Perfil</h1>
 
-    <div class="card">
+    <form class = 'card' action = "{{ url_for('content_perfil') }}" method = 'POST'>
 
-        <label class="label">Nome:</label>
+        <h1 class = "titulo">Meu Perfil</h1>
 
-        <p class = 'input' style = 'text-align: left;'>{{ session['cliente_nome']|title }}</p>
+        <label class = "label">Nome:</label>
 
-        <label class="label">Email:</label>
+            <p class = 'input' style = 'text-align: left;'>{{ session['cliente_nome']|title }}</p>
+
+        <label class = "label">Email:</label>
         
-        <p class = 'input' style = 'text-align: left;'>{{ session['cliente_email'] }}</p>
+            <p class = 'input' style = 'text-align: left;'>{{ session['cliente_email'] }}</p>
 
-        <label class="label">CPF:</label>
-        <input type="text" class="input">
+        {% if cliente_cpf and cliente_rg is not none %}
 
-        <label class="label">RG:</label>
-        <input type="text" class="input">
+            <label class = 'label'>CPF:</label>
 
-        <button>Salvar</button>
+                <p class = 'input' style = 'text-align: left;'>{{ session['cliente_cpf']  }}</p>
 
-    </div>
+            <label class = 'label'>RG:</label>
+
+                <p class = 'input' style = 'text-align: left;'>{{ session['cliente_rg'] }}</p>
+
+        {% else %}
+
+            {{ form.hidden_tag() }}
+    
+            {{ form.cpf.label( class = 'label' ) }}
+            {{ form.cpf( type = 'text', class = 'input' ) }}
+
+            {{ form.rg.label( class = 'label' ) }}
+            {{ form.rg( type = 'text', class = 'input' ) }}
+
+            {{ form.submit(class = 'btn') }}
+
+        {% endif %}
+
+    </form>
+
+    <a href = "{{ url_for('logout') }}" class = 'btn' style="margin-top: 15px; background-color: #dc3545; color: white;">Sair</a>
+
 </div>
 
 </body>
+
 </html>

@@ -42,7 +42,9 @@
             <!-- mensagem flash -->
             {% for message in get_flashed_messages() %}
                 <div class="alert alert-error" style="margin-top: 15px; padding: 10px; background-color: #f8d7da; color: #721c24; border-radius: 5px;">
+                    
                     {{ message }}
+                    
                 </div>
             {% endfor %}
 
