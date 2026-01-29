@@ -63,7 +63,7 @@ def content_reserva_sala():
     if 'cliente_id' not in session:
         return redirect(url_for('login'))
     form = ReservaSalaForm()
-0
+
 @app.route('/dashboard/content/reserva/veiculo')
 def content_reserva_veiculo():
     # Ler o arquivo HTML diretamente sem processar Jinja2(usa python em arquivo html)

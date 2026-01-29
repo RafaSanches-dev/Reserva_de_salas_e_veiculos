@@ -1,12 +1,24 @@
+import os
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+
+try:
+    from dotenv import load_dotenv
+
+    load_dotenv()
+except Exception:
+    pass
 
 # criar o app
 app = Flask(__name__)
 
 # configurações
-app.config['SECRET_KEY'] = 'super_secret_key'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:EAEACDF099@localhost/reserva_uemg'
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv(
+    'DATABASE_URL',
+    'postgresql+psycopg://postgres:CHANGE_ME@db.urvhsfehuhgbygiwpwaj.supabase.co:5432/postgres',
+)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # criar o banco de dados(conexão)

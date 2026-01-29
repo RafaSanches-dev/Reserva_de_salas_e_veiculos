@@ -22,4 +22,5 @@ class ReservaDeSala(db.Model):
     fim = db.Column(db.Time, nullable=False)
     titulo_da_reserva = db.Column(db.Text, nullable=False)
     finalidade = db.Column(db.Text, nullable=False)
+    # foreignkey tem que colocar no modelo do banco de dados, nesse caso ela guarda qual cliente esta fazendo a reserva(o id do cliente)
     cliente_id = db.Column(db.Integer, db.ForeignKey('cliente.id'), nullable=False)

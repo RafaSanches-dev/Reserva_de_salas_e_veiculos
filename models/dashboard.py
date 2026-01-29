@@ -11,4 +11,4 @@ class PerfilForm(FlaskForm):
 class ReservaSalaForm(FlaskForm):
 
      sala = FieldList(StringField('Sala:', validators = [DataRequired()]), max_entries=1)
-     
+     data = DateField('Data:', validators = [DataRequired()])
