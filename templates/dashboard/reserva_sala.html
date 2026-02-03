@@ -3,29 +3,39 @@
 
     <div class="card">
 
-        <label class="label">Sala:</label>
-        <select class="input">
-            <option>Laboratório 01</option>
-            <option>Laboratório 02</option>
-            <option>Sala de Reunião</option>
-        </select>
+        <form id ='reserva-sala-form' action = '{{ url_for("content_reserva_sala") }}'  method = 'POST'>
 
-        <label class="label">Data:</label>
-        <input type="date" class="input">
+            {{ form.hidden_tag() }}
 
-        <label class="label">Início:</label>
-        <input type="time" class="input">
+            {{ form.sala.label(class='label') }}
+            {{ form.sala(class='input')}}
 
-        <label class="label">Fim:</label>
-        <input type="time" class="input">
+            {{form.data.label(class='label')}}
+            {{form.data(class='input')}}
 
-        <label class="label">Título da reserva:</label>
-        <textarea class="input" placeholder="Ex: CineDebate"></textarea>
+            {{form.inicio.label(class='label')}}
+            {{form.inicio(class='input')}}
 
-        <label class="label">Finalidade:</label>
-        <textarea class="input" rows="3" placeholder="Descreva a finalidade da reserva"></textarea>
+            {{form.fim.label(class='label')}}
+            {{form.fim(class='input')}}
 
-        <button class="btn">Enviar Solicitação</button>
+            {{form.titulo_da_reserva.label(class='label')}}
+            {{form.titulo_da_reserva(class='input', placeholder='Ex: CineDebate')}}
+
+            {{form.finalidade.label(class='label')}}
+            {{form.finalidade(class='input', rows='3', placeholder='Descreva a finalidade da reserva')}}
+
+            {{ form.submit(class = 'btn') }}
+
+            <div id="reserva-sala-msg" class="alert" style="display:none; margin-top: 15px;"></div>
+
+            {% for message in get_flashed_messages() %}
+                <div class="alert alert-success" style="margin-top: 15px; padding: 10px; background-color: #d4edda; color: #155724; border-radius: 5px;">
+                    {{ message}}
+                </div>
+            {% endfor %}
+
+        </form>
 
     </div>
 </div>

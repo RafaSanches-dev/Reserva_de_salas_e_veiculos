@@ -72,9 +72,113 @@ button:hover {
   cursor: pointer;
 }
 
+.btn.btn-primary {
+  background: #2f6feb;
+}
+
+.btn.btn-secondary {
+  background: #6c757d;
+}
+
+.btn.btn-danger {
+  background: #d9480f;
+}
+
 .btn:hover { 
   opacity: 0.95; 
 }
+
+/* Perfil (Dashboard) */
+.perfil-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.perfil-actions .btn {
+  min-width: 140px;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Actions (genérico) */
+.actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.actions .btn {
+  min-width: 140px;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Avisos */
+.avisos-container {
+  max-width: 900px;
+  margin: 20px auto;
+}
+
+.aviso-card {
+  background: #ffffff;
+  padding: 18px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  box-shadow: 0px 0px 8px rgba(0,0,0,0.1);
+  border-left: 5px solid #3498db;
+}
+
+.aviso-header {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.aviso-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.aviso-actions .btn {
+  min-width: 110px;
+  padding: 8px 12px;
+}
+
+.aviso-card h3 {
+  margin: 0 0 6px 0;
+  font-size: 20px;
+  color: #333;
+  text-align: left;
+}
+
+.aviso-card p {
+  margin: 4px 0;
+  font-size: 15px;
+  color: #555;
+}
+
+.aviso-data {
+  font-size: 13px;
+  color: #888;
+  margin-top: 10px;
+  text-align: left;
+}
+
+.aviso-info { border-left-color: #3498db !important; }
+.aviso-important { border-left-color: #e74c3c !important; }
+.aviso-warning { border-left-color: #f1c40f !important; }
+.aviso-success { border-left-color: #2ecc71 !important; }
 
 .box-opcao:hover {
     transform: scale(1.06);
@@ -186,6 +290,29 @@ a:hover {
 
 
 /* Avisos */
+
+.status {
+  display: inline-block;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+.status.pendente {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status.aprovado {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status.rejeitado {
+  background: #f8d7da;
+  color: #721c24;
+}
 
 .alert {
   padding: 12px 16px;

@@ -1,52 +1,79 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <title>Minhas Reservas</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/componentes.css' )}}">
-</head>
-<body>
-
 <div class="pagina">
-
     <h1 class="titulo">Minhas Reservas</h1>
 
-    <div class="card">
-
+    <div class="card" style="text-align: center;">
         <h2 class="subtitulo">Reservas de Sala</h2>
 
-        <div class="lista">
-            <!-- Exemplo 1 -->
-            <div class="item">
-                <p><strong>Sala:</strong></p>
-                <p><strong>Data:</strong></p>
-                <p><strong>Horário:</strong></p>
-                <span class="status pendente"></span>
-            </div>
-
-            <!-- Exemplo 2 -->
-            <div class="item">
-                <p><strong>Sala:</strong></p>
-                <p><strong>Data:</strong></p>
-                <p><strong>Horário:</strong></p>
-                <span class="status aprovado"></span>
-            </div>
-        </div>
-
-        <h2 class="subtitulo"></h2>
-
-        <div class="lista">
-            <div class="item">
-                <p><strong>Veículo:</strong></p>
-                <p><strong>Destino:</strong></p>
-                <p><strong>Saída:</strong></p>
-                <span class="status negado"></span>
-            </div>
-        </div>
-
+        {% if reservas_sala|length == 0 %}
+            <p>Você ainda não solicitou reservas de sala.</p>
+        {% else %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sala</th>
+                        <th>Data</th>
+                        <th>Horário</th>
+                        <th>Título</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for r in reservas_sala %}
+                        <tr>
+                            <td>{{ r.sala }}</td>
+                            <td>{{ r.data.strftime('%d/%m/%Y') }}</td>
+                            <td>{{ r.inicio.strftime('%H:%M') }} - {{ r.fim.strftime('%H:%M') }}</td>
+                            <td>{{ r.titulo_da_reserva }}</td>
+                            <td>
+                                <span class="status {{ r.status }}">{{ r.status|capitalize }}</span>
+                                {% if r.status == 'rejeitado' and r.motivo_rejeicao %}
+                                    <div style="margin-top:6px; font-size:13px; color:#555;">Motivo: {{ r.motivo_rejeicao }}</div>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
     </div>
 
-</div>
+    <div class="card" style="text-align: center;">
+        <h2 class="subtitulo">Reservas de Veículo</h2>
 
-</body>
-</html>
+        <!-- o filtro length é contador, na caso de uma lista ele conta a quantidade de itens de uma lista, 
+         agora em uma string sozinha conta a quantidade de caractéres, no caso da reservas_veiculo senda uma lista vazia o length retorna 0, 
+         e diz que nao soliciotou reservasas
+        -->
+        {% if reservas_veiculo|length == 0 %}
+            <p>Você ainda não solicitou reservas de veículo.</p>
+        {% else %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Veículo</th>
+                        <th>Destino</th>
+                        <th>Saída</th>
+                        <th>Retorno</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for r in reservas_veiculo %}
+                        <tr>
+                            <td>{{ r.veiculo }}</td>
+                            <td>{{ r.destino }}</td>
+                            <td>{{ r.data_saida.strftime('%d/%m/%Y') }} {{ r.horario_saida.strftime('%H:%M') }}</td>
+                            <td>{{ r.data_retorno.strftime('%d/%m/%Y') }} {{ r.horario_retorno.strftime('%H:%M') }}</td>
+                            <td>
+                                <span class="status {{ r.status }}">{{ r.status|capitalize }}</span>
+                                {% if r.status == 'rejeitado' and r.motivo_rejeicao %}
+                                    <div style="margin-top:6px; font-size:13px; color:#555;">Motivo: {{ r.motivo_rejeicao }}</div>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+</div>

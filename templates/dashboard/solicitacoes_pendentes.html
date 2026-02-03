@@ -1,87 +1,54 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solicitações Pendentes</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/componentes.html')}}">
-    <style>
-        body {
-            padding: 20px;
-        }
+<div class="pagina">
+    <h1 class="titulo">Solicitações Pendentes</h1>
 
-        h2 {
-            margin-bottom: 20px;
-            font-size: 26px;
-            color: #333;
-        }
+    <div id="solicitacoes-msg" class="alert" style="display:none;"></div>
 
-        .solicitacao-card {
-            background: #fff;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-
-        .solicitacao-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-
-        .status {
-            font-weight: bold;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 14px;
-        }
-
-        .pendente { background: #fff3cd; color: #856404; }
-        .aprovado { background: #d4edda; color: #155724; }
-        .rejeitado { background: #f8d7da; color: #721c24; }
-
-        .motivo {
-            margin-top: 10px;
-            font-style: italic;
-            color: #555;
-        }
-    </style>
-</head>
-<body>
-
-    <h2>Solicitações Pendentes</h2>
-
-    <!-- Solicitação Pendente -->
-    <div class="solicitacao-card">
-        <div class="solicitacao-header">
-            <span><strong>Reserva:</strong></span>
-            <span class="status pendente"></span>
+    {% set total = (reservas_sala|length) + (reservas_veiculo|length) %}
+    {% if total == 0 %}
+        <div class="card">
+            <p>Nenhuma solicitação pendente no momento.</p>
         </div>
-        <p><strong>Data solicitada:</strong></p>
-        <p><strong>Horário:</strong></p>
-    </div>
+    {% endif %}
 
-    <!-- Solicitação Aprovada -->
-    <div class="solicitacao-card">
-        <div class="solicitacao-header">
-            <span><strong>Reserva:</strong></span>
-            <span class="status aprovado"></span>
+    {% for r in reservas_sala %}
+        <div class="card solicitacao-card" data-tipo="sala" data-id="{{ r.id }}">
+            <div class="solicitacao-header" style="display:flex; justify-content:space-between; gap:12px; align-items:center;">
+                <div>
+                    <strong>Sala:</strong> {{ r.sala }}
+                </div>
+                <span class="status pendente">Pendente</span>
+            </div>
+            <p><strong>Solicitante:</strong> {{ r.cliente.nome if r.cliente else ('ID ' ~ r.cliente_id) }}</p>
+            <p><strong>Data:</strong> {{ r.data.strftime('%d/%m/%Y') }}</p>
+            <p><strong>Horário:</strong> {{ r.inicio.strftime('%H:%M') }} - {{ r.fim.strftime('%H:%M') }}</p>
+            <p><strong>Título:</strong> {{ r.titulo_da_reserva }}</p>
+            <p><strong>Finalidade:</strong> {{ r.finalidade }}</p>
+
+            <div class="acoes" style="display:flex; gap:10px; margin-top:12px;">
+                <button type="button" class="btn btn-primary js-aprovar">Aprovar</button>
+                <button type="button" class="btn btn-danger js-rejeitar">Rejeitar</button>
+            </div>
         </div>
-        <p><strong>Data solicitada:</strong></p>
-        <p><strong>Horário:</strong></p>
-    </div>
+    {% endfor %}
 
-    <!-- Solicitação Rejeitada -->
-    <div class="solicitacao-card">
-        <div class="solicitacao-header">
-            <span><strong>Reserva:</strong></span>
-            <span class="status rejeitado"></span>
+    {% for r in reservas_veiculo %}
+        <div class="card solicitacao-card" data-tipo="veiculo" data-id="{{ r.id }}">
+            <div class="solicitacao-header" style="display:flex; justify-content:space-between; gap:12px; align-items:center;">
+                <div>
+                    <strong>Veículo:</strong> {{ r.veiculo }}
+                </div>
+                <span class="status pendente">Pendente</span>
+            </div>
+            <p><strong>Solicitante:</strong> {{ r.cliente.nome if r.cliente else ('ID ' ~ r.cliente_id) }}</p>
+            <p><strong>Saída:</strong> {{ r.data_saida.strftime('%d/%m/%Y') }} às {{ r.horario_saida.strftime('%H:%M') }}</p>
+            <p><strong>Retorno:</strong> {{ r.data_retorno.strftime('%d/%m/%Y') }} às {{ r.horario_retorno.strftime('%H:%M') }}</p>
+            <p><strong>Destino:</strong> {{ r.destino }}</p>
+            <p><strong>Motivo:</strong> {{ r.motivo }}</p>
+
+            <div class="acoes" style="display:flex; gap:10px; margin-top:12px;">
+                <button type="button" class="btn btn-primary js-aprovar">Aprovar</button>
+                <button type="button" class="btn btn-danger js-rejeitar">Rejeitar</button>
+            </div>
         </div>
-        <p><strong>Data solicitada:</strong></p>
-        <p><strong>Horário:</strong></p>
-        <p class="motivo"><strong>Motivo:</strong></p>
-    </div>
-
-</body>
-</html>
+    {% endfor %}
+</div>

@@ -29,7 +29,9 @@
         <a href="#" data-page="home">Home</a>
         <a href="#" data-page="perfil">Perfil</a>
         <a href="#" data-page="solicitar_reserva">Solicitar Reserva</a>
-        <a href="#" data-page="solicitacoes_pendentes">Solicitações Pendentes</a>
+        {% if session.get('cliente_perfil') == 'aprovador' %}
+            <a href="#" data-page="solicitacoes_pendentes">Solicitações Pendentes</a>
+        {% endif %}
         <a href="#" data-page="minhas_reservas">Minhas Reservas</a>
         <a href="#" data-page="avisos">Avisos</a>
 

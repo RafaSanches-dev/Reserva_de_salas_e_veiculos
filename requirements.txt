@@ -2,7 +2,8 @@ Flask
 Flask-SQLAlchemy
 SQLAlchemy
 PyMySQL
-psycopg[binary]
-python-dotenv
 Flask-WTF
-email-validator
+WTForms
+email_validator
+itsdangerous
+python-dotenv

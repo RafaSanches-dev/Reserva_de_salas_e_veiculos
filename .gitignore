@@ -1,7 +1,17 @@
 # Python
 __pycache__/
-*.pyc
-.venv/
+*.py[cod]
+*.pyo
+*.pyd
+*.sqlite3
 
-# Environment
+# Virtual env
+.venv/
+venv/
+
+# Env secrets
 .env
+
+# OS
+.DS_Store
+Thumbs.db

@@ -3,32 +3,36 @@
 
     <div class="card">
 
-        <label class="label">Veículo:</label>
-        <select class="input">
-            <option>Van Escolar</option>
-            <option>Carro Administrativo</option>
-            <option>Ônibus Universitário</option>
-        </select>
+        <form id="reserva-veiculo-form" action="{{ url_for('content_reserva_veiculo') }}" method="post">
 
-        <label class="label">Data de Saída:</label>
-        <input type="date" class="input">
+            {{ form.hidden_tag() }}
 
-        <label class="label">Horário de Saída:</label>
-        <input type="time" class="input">
+            {{ form.veiculo.label(class='label') }}
+            {{ form.veiculo(class='input') }}
 
-        <label class="label">Data de Retorno:</label>
-        <input type="date" class="input">
+            {{ form.data_saida.label(class='label') }}
+            {{ form.data_saida(class='input') }}
 
-        <label class="label">Horário de Retorno:</label>
-        <input type="time" class="input">
+            {{ form.horario_saida.label(class='label') }}
+            {{ form.horario_saida(class='input') }}
 
-        <label class="label">Destino:</label>
-        <input type="text" class="input" placeholder="Ex: Uberlândia, Patos, etc.">
+            {{ form.data_retorno.label(class='label') }}
+            {{ form.data_retorno(class='input') }}
 
-        <label class="label">Motivo:</label>
-        <textarea class="input" rows="3" placeholder="Descreva o motivo da viagem"></textarea>
+            {{ form.horario_retorno.label(class='label') }}
+            {{ form.horario_retorno(class='input') }}
 
-        <button class="btn">Enviar Solicitação</button>
+            {{ form.destino.label(class='label') }}
+            {{ form.destino(class='input', rows='3', placeholder='Descreva o destino da viagem') }}
+
+            {{ form.motivo.label(class='label') }}
+            {{ form.motivo(class='input', rows='3', placeholder='Descreva o motivo da viagem')}}
+        
+            {{ form.submit(class='btn') }}
+
+            <div id="reserva-veiculo-msg" class="alert" style="display:none; margin-top: 15px;"></div>
+
+        </form>
 
     </div>
 </div>

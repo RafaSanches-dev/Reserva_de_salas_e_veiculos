@@ -1,80 +1,58 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avisos</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/componentes.css' )}}">
-    <style>
-        .avisos-container {
-            max-width: 900px;
-            margin: 30px auto;
-            padding: 20px;
-        }
+<div class="pagina">
+    <h1 class="titulo">Avisos</h1>
 
-        .aviso-card {
-            background: #ffffff;
-            padding: 18px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            box-shadow: 0px 0px 8px rgba(0,0,0,0.1);
-            border-left: 5px solid #3498db;
-        }
+    <div id="avisos-msg" class="alert alert-warning" style="display:none;"></div>
 
-        .aviso-card h3 {
-            margin-bottom: 6px;
-            font-size: 20px;
-            color: #333;
-        }
+    {% if is_aprovador %}
+        <form id="avisos-form" class="card" action="{{ url_for('api_criar_aviso') }}" method="post">
+            <h2 style="text-align:left; margin-top:0;">Publicar novo aviso</h2>
 
-        .aviso-card p {
-            margin: 4px 0;
-            font-size: 15px;
-            color: #555;
-        }
+            <label class="label">Título:</label>
+            <input type="text" name="titulo" class="input" maxlength="140" required placeholder="Ex: Manutenção no laboratório" />
 
-        .aviso-data {
-            font-size: 13px;
-            color: #888;
-            margin-top: 8px;
-        }
+            <label class="label">Tipo:</label>
+            <select name="tipo" class="input">
+                <option value="info">Informação</option>
+                <option value="important">Importante</option>
+                <option value="warning">Atenção</option>
+                <option value="success">Boa notícia</option>
+            </select>
 
-        .aviso-important {
-            border-left-color: #e74c3c !important;
-        }
+            <label class="label">Mensagem:</label>
+            <textarea name="mensagem" class="input" rows="4" required placeholder="Digite o aviso..."></textarea>
 
-        .aviso-warning {
-            border-left-color: #f1c40f !important;
-        }
-
-        .aviso-success {
-            border-left-color: #2ecc71 !important;
-        }
-    </style>
-</head>
-<body>
+            <div class="actions">
+                <button type="submit" class="btn btn-primary">Publicar</button>
+            </div>
+        </form>
+    {% endif %}
 
     <div class="avisos-container">
-        <h2>📢 Avisos</h2>
-
-        <div class="aviso-card aviso-important">
-            <h3></h3>
-            <p></p>
-            <p class="aviso-data">Postado em:</p>
-        </div>
-
-        <div class="aviso-card aviso-warning">
-            <h3></h3>
-            <p></p>
-            <p class="aviso-data">Postado em:</p>
-        </div>
-
-        <div class="aviso-card aviso-success">
-            <h3></h3>
-            <p></p>
-            <p class="aviso-data">Postado em:</p>
-        </div>
+        {% if avisos and avisos|length > 0 %}
+            {% for aviso in avisos %}
+                <div class="aviso-card aviso-{{ aviso.tipo or 'info' }}" data-aviso-id="{{ aviso.id }}" data-aviso-titulo="{{ aviso.titulo|e }}" data-aviso-mensagem="{{ aviso.mensagem|e }}" data-aviso-tipo="{{ aviso.tipo or 'info' }}">
+                    <div class="aviso-header">
+                        <h3>{{ aviso.titulo }}</h3>
+                        {% if is_aprovador %}
+                            <div class="aviso-actions">
+                                <button type="button" class="btn btn-secondary js-editar-aviso">Editar</button>
+                                <button type="button" class="btn btn-danger js-apagar-aviso">Apagar</button>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <p style="text-align:left; white-space:pre-wrap;">{{ aviso.mensagem }}</p>
+                    <p class="aviso-data">
+                        Postado em {{ aviso.criado_em.strftime('%d/%m/%Y %H:%M') }}
+                        {% if aviso.autor and aviso.autor.nome %}
+                            por {{ aviso.autor.nome|title }}
+                        {% endif %}
+                    </p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="card">
+                <p style="text-align:center;">Nenhum aviso publicado ainda.</p>
+            </div>
+        {% endif %}
     </div>
-
-</body>
-</html>
+</div>

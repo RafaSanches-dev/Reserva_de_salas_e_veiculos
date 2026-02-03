@@ -1,12 +1,3 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <title>Perfil</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/componentes.css')}}">
-</head>
-<body>
-
 <div class="pagina">
 
     <form class = 'card' action = "{{ url_for('content_perfil') }}" method = 'POST'>
@@ -21,36 +12,37 @@
         
             <p class = 'input' style = 'text-align: left;'>{{ session['cliente_email'] }}</p>
 
-        {% if cliente_cpf and cliente_rg is not none %}
+        {{ form.hidden_tag() }}
 
+        <div id="perfil-readonly" {% if not cliente_cpf or not cliente_rg %}style="display:none;"{% endif %}>
             <label class = 'label'>CPF:</label>
-
-                <p class = 'input' style = 'text-align: left;'>{{ session['cliente_cpf']  }}</p>
+            <p class = 'input' style = 'text-align: left;'>{{ cliente_cpf or '' }}</p>
 
             <label class = 'label'>RG:</label>
+            <p class = 'input' style = 'text-align: left;'>{{ cliente_rg or '' }}</p>
 
-                <p class = 'input' style = 'text-align: left;'>{{ session['cliente_rg'] }}</p>
+            <div class="perfil-actions">
+                <button type="button" id="btn-editar-perfil" class="btn btn-primary">Editar</button>
+                <a href="{{ url_for('logout') }}" class="btn btn-danger">Sair</a>
+            </div>
+        </div>
 
-        {% else %}
-
-            {{ form.hidden_tag() }}
-    
+        <div id="perfil-edit" {% if cliente_cpf and cliente_rg %}style="display:none;"{% endif %}>
             {{ form.cpf.label( class = 'label' ) }}
-            {{ form.cpf( type = 'text', class = 'input' ) }}
+            {{ form.cpf( type = 'text', class = 'input', placeholder = 'Digite seu CPF' ) }}
 
             {{ form.rg.label( class = 'label' ) }}
-            {{ form.rg( type = 'text', class = 'input' ) }}
+            {{ form.rg( type = 'text', class = 'input', placeholder = 'Digite seu RG' ) }}
 
-            {{ form.submit(class = 'btn') }}
-
-        {% endif %}
+            <div class="perfil-actions">
+                {{ form.submit(class = 'btn btn-primary') }}
+                {% if cliente_cpf and cliente_rg %}
+                    <button type="button" id="btn-cancelar-perfil" class="btn btn-secondary">Cancelar</button>
+                {% endif %}
+                <a href="{{ url_for('logout') }}" class="btn btn-danger">Sair</a>
+            </div>
+        </div>
 
     </form>
 
-    <a href = "{{ url_for('logout') }}" class = 'btn' style="margin-top: 15px; background-color: #dc3545; color: white;">Sair</a>
-
 </div>
-
-</body>
-
-</html>

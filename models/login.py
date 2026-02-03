@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
-from wtforms.validators import DataRequired, Email, EqualTo
+from wtforms.validators import DataRequired, Email, EqualTo, Length
 
 # o validador Email do wtf.validators já verifica se o email está em um formato válido, 
 # e ele precisa da biblioteca email_validator instalada
@@ -18,3 +18,19 @@ class LoginForm(FlaskForm):
     email = StringField('Email:', validators = [DataRequired(), Email()])
     senha = PasswordField('Senha', validators = [DataRequired()])
     submit = SubmitField('Entrar')
+
+
+class ForgotPasswordForm(FlaskForm):
+
+    email = StringField('Email cadastrado:', validators=[DataRequired(), Email()])
+    submit = SubmitField('Enviar link')
+
+
+class ResetPasswordForm(FlaskForm):
+
+    nova_senha = PasswordField('Nova senha:', validators=[DataRequired(), Length(min=6)])
+    confirmar_nova_senha = PasswordField(
+        'Confirmar nova senha:',
+        validators=[DataRequired(), EqualTo('nova_senha', message='As senhas devem coincidir.')],
+    )
+    submit = SubmitField('Redefinir senha')
