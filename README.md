@@ -1,6 +1,6 @@
 # Sistema de Reserva de Salas e Veículos
 
-Sistema web desenvolvido para facilitar o gerenciamento de reservas de **salas de informática e veículos** para atividades acadêmicas e eventos.
+Sistema web desenvolvido para facilitar o gerenciamento de reservas de **salas e veículos** para atividades acadêmicas e eventos.
 
 O projeto foi desenvolvido durante a graduação em **Engenharia da Computação na UEMG – Unidade Ituiutaba**, com o objetivo de aplicar na prática conceitos de desenvolvimento web, banco de dados e organização de software.
 
