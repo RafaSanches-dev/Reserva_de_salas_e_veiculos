@@ -21,7 +21,9 @@ def _env_bool(name: str, default: bool = False) -> bool:
 
 class Config:
     # Segurança
-    SECRET_KEY = os.getenv("SECRET_KEY", "EAEACDF099")
+    SECRET_KEY = os.getenv("SECRET_KEY")
+    if not SECRET_KEY:
+        raise RuntimeError("Defina a variável de ambiente SECRET_KEY.")
 
     # Banco
     SQLALCHEMY_DATABASE_URI = os.getenv("SQLALCHEMY_DATABASE_URI")

@@ -9,7 +9,7 @@ Este projeto envia emails por SMTP para:
 
 Defina estas variáveis (ex.: no Windows, nas variáveis do sistema; ou usando um `.env` via seu método preferido):
 
-- `SECRET_KEY` (obrigatório em produção)
+- `SECRET_KEY` (obrigatório; use uma chave aleatória forte e mantenha-a fora do repositório)
 - `SQLALCHEMY_DATABASE_URI` (obrigatório; por exemplo, `mysql+pymysql://usuario:senha@localhost:3306/reserva_uemg`)
 
 ### SMTP
