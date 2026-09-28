@@ -24,10 +24,9 @@ class Config:
     SECRET_KEY = os.getenv("SECRET_KEY", "nao sei")
 
     # Banco
-    SQLALCHEMY_DATABASE_URI = os.getenv(
-        "SQLALCHEMY_DATABASE_URI",
-        "mysql+pymysql://root:EAEACDF099@localhost:3306/reserva_uemg",
-    )
+    SQLALCHEMY_DATABASE_URI = os.getenv("SQLALCHEMY_DATABASE_URI")
+    if not SQLALCHEMY_DATABASE_URI:
+        raise RuntimeError("Defina a variável de ambiente SQLALCHEMY_DATABASE_URI.")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Email (SMTP)
